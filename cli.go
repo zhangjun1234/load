@@ -10,8 +10,7 @@ import (
 type CLI struct {
 }
 
-const Usage = `
-	"命令提示 ："
+const Usage = `命令提示 ：
 	 .      "上传当前目录下所有文件,例如: upload . "
 `
 
@@ -36,6 +35,8 @@ func (cli *CLI) Run() {
 			fmt.Println(err)
 			return
 		}
+		//tmpPath := strings.Split(AbsPath, "/")
+		//path := tmpPath[len(tmpPath)-1]
 		cli.UploadAllFile(path)
 	default:
 		fmt.Printf("无效的命令，请检查!\n")

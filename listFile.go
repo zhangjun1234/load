@@ -4,9 +4,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
+	"strings"
 )
 
-const urlstring = "http://127.0.0.1:5001/api/v0/add"
+const urlstring = "http://127.0.0.1:5001/api/v0/add?"
+var path,_=os.Getwd()
+var trim ="/"
+var TrimPrefix=path+trim
 var filePaths [] string
 func UploadFiles(path string)  {
 	//listFiles("/home/miaowu/test","http://127.0.0.1:5001/api/v0/add")
@@ -38,6 +43,8 @@ func listFiles(dirname string) {
 			//继续遍历fi这个目录
 			listFiles(filename)
 		}else{
+			filename = strings.TrimPrefix(filename,TrimPrefix)
+			//fmt.Println("当前去掉前缀后路径为 ：",filename)
 			filePaths = append(filePaths, filename)
 		}
 	}
