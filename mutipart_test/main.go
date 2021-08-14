@@ -42,8 +42,12 @@ func PostPath(path string, urlString string) {
 			fmt.Println(err)
 		}
 	}
-	_ = writer.Close()
-	resp, err := http.Post("http://127.0.0.1:5001/api/v0/add", writer.FormDataContentType(), body)
+	err = writer.Close()
+	if err != nil {
+		fmt.Println (err)
+		return
+	}
+	resp, err := http.Post(target_url, writer.FormDataContentType(), body)
 	if err != nil {
 		fmt.Println("resp err : ", err)
 		return
@@ -137,7 +141,7 @@ func postFile2(fileName1 string, fileName2 string) {
 	_ = writer.Close()
 	fmt.Println(body.String())
 
-	resp, err := http.Post("http://127.0.0.1:5001/api/v0/add", writer.FormDataContentType(), body)
+	resp, err := http.Post(target_url, writer.FormDataContentType(), body)
 	if err != nil {
 		fmt.Println("err : ", err)
 		return
